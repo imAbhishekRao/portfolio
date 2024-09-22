@@ -1,78 +1,73 @@
-
 import React from "react";
-import vpn from '../assets/vpn.png'
-import copeople from '../assets/copeople.png'
-import Footer from './Footer'
+import { CardBody, CardContainer, CardItem } from "./ui/3d-card"; // Adjust the import path based on your folder structure
 
-const ProjectCard = ({ image, title, description, git, technologies }) => {
-    return (
-        <div className="max-w-sm sm:max-w-sm md:max-w-sm bg-gray-900 border border-neutral-100 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            {title=='Snap Shot' && <a href="#">
-                <img className="w-full rounded-t-lg h-auto object-cover " src={vpn} alt="" />
-            </a>}
-            {title=='Co People' && <a href="#">
-                <img className="w-full rounded-t-lg h-auto object-cover " src={copeople} alt="" />
-            </a>}
-            <div className="p-4 sm:p-6">
-                <a href="#">
-                    <h5 className="text-2xl sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white bg-clip-text text-transparent bg-gradient-to-r from-yellow-200 to-pink-500">{title}</h5>
-                </a>
-                <p className="font-normal text-sm sm:text-base md:text-lg text-gray-300 dark:text-gray-400">{description}</p>
-            </div>
-            <div className='m-2 sm:m-4 lg:m-6 flex justify-between'>
-                <div className='flex flex-wrap gap-2 pl-2'>
-                    {technologies.map((tag, index) => (
-                        <p
-                            key={`${index}-${tag}`}
-                            className='text-[14px] text-blue-500'
-                        >
-                            #{tag}
-                        </p>
-                    ))}
-                </div>
-                <a href={git} className="text-red-300 border border-gray-200 rounded-lg shadow p-1 sm:p-2 lg:p-3 hover:text-green-500 duration-300">GitHub</a>
-            </div>
-        </div>
-    );
-};
-  
-const Projects = () => {
-    return (
-        <div className="bg-black">
-            <div className="flex flex-wrap gap-7 justify-center items-center m-12 p-12">
-                {project.map((item, index) => (
-                    <ProjectCard
-                        key={index}
-                        image={item.image}
-                        title={item.title}
-                        description={item.description}
-                        links={item.links}
-                        git={item.git}
-                        technologies={item.technologies}
-                    />
-                ))}
-            </div>
-            <Footer/>
-        </div>
-    );
+// Example project data (replace with your actual project data)
+const projectData = [
+  {
+    title: "Project One",
+    description: "This is a description for Project One.",
+    imageUrl: "https://my-portfolio-five-kohl-77.vercel.app/static/media/nyaysathi.ba7714c9a6af5c72490a.png", // Use the correct path for your image
+  },
+  {
+    title: "Project Two",
+    description: "This is a description for Project Two.",
+    imageUrl: "https://github.com/imAbhishekRao/vizionix/blob/master/src/image/Screenshot%202024-09-22%20202959.png?raw=true",
+  },
+  {
+    title: "Project Three",
+    description: "This is a description for Project Two.",
+    imageUrl: "https://my-portfolio-five-kohl-77.vercel.app/static/media/algoarena.7aed35aa3dff0b93d359.png",
+  },
+];
+
+export function Projects() {
+  return (
+    <div className="bg-black text-white py-10"> {/* Added bg-black and text-white */}
+      <div className="flex flex-wrap justify-center gap-6">
+        {projectData.map((project, index) => (
+          <CardContainer key={index} className="inter-var">
+            <CardBody
+              className="bg-black relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-white/[0.3] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-white dark:text-white">
+                {project.title}
+              </CardItem>
+              <CardItem
+                as="p"
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300">
+                {project.description}
+              </CardItem>
+              <CardItem translateZ="100" rotateX={20} rotateZ={-10} className="w-full mt-4">
+                <img
+                  src={project.imageUrl}
+                  alt={project.title}
+                  className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                />
+              </CardItem>
+              <div className="flex justify-between items-center mt-20">
+                <CardItem
+                  translateZ={20}
+                  translateX={-40}
+                  as="button"
+                  className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white">
+                  View Project →
+                </CardItem>
+                <CardItem
+                  translateZ={20}
+                  translateX={40}
+                  as="button"
+                  className="px-4 py-2 rounded-xl bg-white dark:bg-white dark:text-black text-black text-xs font-bold">
+                  GitHub
+                </CardItem>
+              </div>
+            </CardBody>
+          </CardContainer>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-
-export const project = [
-    {
-        title:'Co People',
-        description:'Co People is a dynamic web application I crafted using React, Node JS and React. This project is a modern and engaging social platform that allows users to connect, share content and interact seamlessly.',
-        image: {vpn},
-        git:'https://github.com/nithingooud/CoPeople',
-        technologies:['MongoDb' ,'ReactJS' , 'NodeJS']
-    },
-    {
-        title:'Snap Shot',
-        description:'SnapShot is a stunning portfolio that I exclusively designed using React JS and tailwind CSS.This Project serves as a representation of a photographer’s work, highlighting their portfolio and services.',
-        image: {copeople},
-        git:"https://github.com/nithingooud/vpn_studios",
-        technologies:[ 'React JS', 'tailwind CSS']
-    }
-]
-
-export default Projects
+export default Projects;

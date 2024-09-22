@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5",                                  // Set the JavaScript version to emit
+    "lib": ["dom", "dom.iterable", "esnext"],         // Specify the libraries to include
+    "allowJs": true,                                  // Allow JavaScript files to be compiled
+    "skipLibCheck": true,                             // Skip type checking of declaration files
+    "esModuleInterop": true,                          // Emit additional code for better ES module compatibility
+    "allowSyntheticDefaultImports": true,             // Allow default imports from modules with no default export
+    "strict": true,                                   // Enable all strict type-checking options
+    "forceConsistentCasingInFileNames": true,         // Ensure that file names are treated as case-sensitive
+    "noFallthroughCasesInSwitch": true,               // Ensure that 'switch' statements have a 'break' case
+    "module": "esnext",                               // Set the module system to ESNext
+    "moduleResolution": "node",                       // Use Node.js style module resolution
+    "resolveJsonModule": true,                        // Include modules imported from JSON files
+    "isolatedModules": true,                          // Ensure that each file is treated as an isolated module
+    "jsx": "react-jsx",                               // Use React's new JSX transform (React 17+)
+    "baseUrl": "src",                                 // Set base URL for module resolution
+    "paths": {
+      "@components/*": ["components/*"],              // Alias for components folder
+      "@utils/*": ["lib/utils/*"],                    // Alias for utility functions
+      "@assets/*": ["assets/*"]                       // Alias for assets folder
+    }
+  },
+  "include": ["src"],                                 // Specify which paths to include in the compilation
+  "exclude": ["node_modules", "build"],               // Specify paths to exclude from the compilation
+  "ts-node": {
+    "files": true
+  }
+}

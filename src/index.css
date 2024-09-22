@@ -7,7 +7,10 @@
     border-radius : 20px
 }
 
-
+.font-rubik {
+	font-family: 'Rubik', sans-serif;
+      }
+      
 /*Start Animations*/
 @-webkit-keyframes animatetop {
 	from {

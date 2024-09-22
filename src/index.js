@@ -10,13 +10,14 @@ import Experience from './components/Experience';
 import About from './components/About';
 import Contact from './components/Contact';
 import Projects from './components/Projects';
+import LandingPage from '../src/Pages/HomePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
       <Navbar/>
       <Routes>
-        <Route path='/' element={<Home/>}/>
+        <Route path='/' element={<LandingPage/>}/>
         <Route path='/experience' element={<Experience/>}/>
         <Route path='/projects' element={<Projects/>}/>
         <Route path='/about' element={<About/>}/>
