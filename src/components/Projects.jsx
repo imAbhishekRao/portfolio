@@ -18,6 +18,16 @@ const projectData = [
     description: "This is a description for Project Two.",
     imageUrl: "https://my-portfolio-five-kohl-77.vercel.app/static/media/algoarena.7aed35aa3dff0b93d359.png",
   },
+  {
+    title: "Project Three",
+    description: "This is a description for Project Two.",
+    imageUrl: "https://my-portfolio-five-kohl-77.vercel.app/static/media/algoarena.7aed35aa3dff0b93d359.png",
+  },
+  {
+    title: "Project Three",
+    description: "This is a description for Project Two.",
+    imageUrl: "https://my-portfolio-five-kohl-77.vercel.app/static/media/algoarena.7aed35aa3dff0b93d359.png",
+  },
 ];
 
 export function Projects() {
