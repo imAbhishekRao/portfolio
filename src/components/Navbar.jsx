@@ -1,59 +1,55 @@
-import React, { useState ,useEffect} from 'react';
-import { Link,useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { IconHome, IconMessage, IconUser } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+export const Navbar = () => {
+  const { scrollYProgress } = useScroll();
+  const [visible, setVisible] = useState(false); // Start hidden
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
-  };
+  useMotionValueEvent(scrollYProgress, "change", (current) => {
+    if (typeof current === "number") {
+      const direction = current - scrollYProgress.getPrevious();
+      if (scrollYProgress.get() < 0.05) {
+        setVisible(false); // Hide navbar when at the top
+      } else {
+        setVisible(direction < 0); // Show on scroll up, hide on scroll down
+      }
+    }
+  });
 
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
-
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  const navItems = [
+    { name: "Home", link: "/", icon: <IconHome className="h-4 w-4" /> },
+    { name: "About", link: "/about", icon: <IconUser className="h-4 w-4" /> },
+    { name: "Contact", link: "/contact", icon: <IconMessage className="h-4 w-4" /> },
+    { name: "Projects", link: "/projects", icon: <IconMessage className="h-4 w-4" /> },
+  ];
 
   return (
-    <nav className="bg-gray-800 p-4 text-white fixed w-full z-10 top-0" style={{ cursor: 'default' }}>
-      <div className="mx-auto text-center flex w-5/6 justify-between">
-        
-        <div className="hidden sm:flex space-x-4 items-center text-sm">
-          <Link to='/'>Home</Link>
-          <Link to='/about'>About</Link>
-        </div>
-        <div className="text-3xl sm:text-2xl font-extrabold">
-          <a href="/">Abhishek Gobind Rao</a>
-        </div>
-        <div className="hidden sm:flex space-x-4 items-center text-sm">
-          <Link to='/projects'>Projects</Link>
-          <Link to='/experience'>Experience</Link>
-          <Link to='/contact'>Contact</Link>
-        </div>
-
-        <div className="sm:hidden">
-          <button onClick={toggleMobileMenu} className="text-xl focus:outline-none">
-            {isMobileMenuOpen ? '✕' : '☰'}
-          </button>
-        </div>
-        <div className={`sm:hidden fixed top-0 left-0 w-full h-full bg-gray-800 text-center ${isMobileMenuOpen ? 'flex flex-col items-center justify-center' : 'hidden'}`}>
-          <button onClick={closeMobileMenu} className="text-xl absolute top-4 right-4 focus:outline-none">
-            ✕
-          </button>
-          <ul className="font-medium text-2xl space-y-4">
-            <li><Link to='/' onClick={closeMobileMenu}>Home</Link></li>
-            <li><Link to='/about' onClick={closeMobileMenu}>About</Link></li>
-            <li><Link to='/projects' onClick={closeMobileMenu}>Projects</Link></li>
-            <li><Link to='/experience' onClick={closeMobileMenu}>Experince</Link></li>
-            <li><Link to='/contact' onClick={closeMobileMenu}>Contact</Link></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <AnimatePresence>
+      {visible && ( // Only render when visible
+        <motion.div
+          initial={{ opacity: 0, y: -100 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -100, opacity: 0 }} // Animate out
+          transition={{ duration: 0.2 }}
+          className="fixed top-10 inset-x-0 mx-auto max-w-fit flex items-center justify-center space-x-4 pr-8 pl-8 py-4 bg-black dark:bg-black border rounded-full z-[5000]"
+        >
+          {navItems.map((item, idx) => (
+            <Link 
+              key={idx} 
+              to={item.link} 
+              className="flex items-center space-x-1 text-white dark:text-neutral-50 hover:text-neutral-500 dark:hover:text-neutral-300"
+              aria-label={item.name} // Accessibility improvement
+            >
+              {item.icon}
+              <span className="hidden sm:block text-sm">{item.name}</span>
+            </Link>
+          ))}
+          {/* Login button hidden */}
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

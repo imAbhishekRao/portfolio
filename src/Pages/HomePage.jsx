@@ -1,6 +1,7 @@
 import React from 'react';
 import LandingPage from '../components/Home';
 import Projects from '../components/Projects';
+import AnimatedTooltipPreview from '../components/AnimatedTooltipPreview';
 
 export default function HomePage() {
   return (
@@ -11,9 +12,12 @@ export default function HomePage() {
       </div>
 
       {/* Projects Section */}
-      <div style={{ padding: '50px 0' }}>
+      <div style={{ padding: '0px 0' }}>
         <Projects />
       </div>
+      <AnimatedTooltipPreview />
     </>
+
+
   );
 }
