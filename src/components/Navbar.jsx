@@ -20,8 +20,8 @@ export const Navbar = () => {
 
   const navItems = [
     { name: "Home", link: "/", icon: <IconHome className="h-4 w-4" /> },
-    { name: "About", link: "/about", icon: <IconUser className="h-4 w-4" /> },
-    { name: "Contact", link: "/contact", icon: <IconMessage className="h-4 w-4" /> },
+    { name: "About", link: "/", icon: <IconUser className="h-4 w-4" /> },
+    { name: "Contact", link: "/", icon: <IconMessage className="h-4 w-4" /> },
     { name: "Projects", link: "/projects", icon: <IconMessage className="h-4 w-4" /> },
   ];
 
